@@ -429,19 +429,6 @@ int main() {
         cv::Mat cannyimg  = canny(smoothed);
 
 
-        cv::Mat dilated;
-        cv::Mat eroded;
-
-        cv::Mat kernel = getStructuringElement (cv::MORPH_ELLIPSE, cv::Point(9, 9));
-        dilate(cannyimg, dilated, kernel);
-
-        cv::Mat kernel1 = getStructuringElement(cv::MORPH_ELLIPSE, cv::Point(12, 12));
-        erode(dilated, eroded, kernel1);
-
-        imshow("canny", cannyimg);
-        imshow("eroded grouped", eroded);
-
-
         cv::Mat cut = cutOutUnnecessaryParts(cannyimg);
 
         vector<cv::Vec4i> lineSegments = houghLines(cut);
@@ -489,7 +476,7 @@ int main() {
         cv::Mat lanes = drawLanes(cut, leftLaneLineSegments,rightLaneLineSegments);
         cv::imshow("lanes", lanes);
 
-        cv::waitKey(0);
+        cv::waitKey(100);
 
 
 
